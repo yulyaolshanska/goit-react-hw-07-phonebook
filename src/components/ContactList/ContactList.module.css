@@ -1,0 +1,10 @@
+.contactList {
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 40px;
+    padding: 20px;
+    box-shadow: 2px 3px 8px 1px grey;
+    border-radius: 6px;
+}
+

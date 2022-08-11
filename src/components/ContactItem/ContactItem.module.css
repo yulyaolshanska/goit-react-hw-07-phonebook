@@ -1,0 +1,11 @@
+.contactItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.button {
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+}
