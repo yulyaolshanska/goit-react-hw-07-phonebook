@@ -4,6 +4,8 @@ import { useDeleteContactMutation } from 'redux/contactsSlice';
 
 export const ContactItem = ({ name, phone, id }) => {
   const [deleteContact, result] = useDeleteContactMutation();
+  if (result.isSuccess) {
+  }
   return (
     <li className={css.contactItem}>
       <p>{name}</p>
