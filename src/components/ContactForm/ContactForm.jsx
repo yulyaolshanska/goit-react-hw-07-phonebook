@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
 
 import {
@@ -9,12 +8,9 @@ import {
 
 export function ContactForm() {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
-  const { data: contacts, error, isLoading } = useGetContactsQuery();
+  const [phone, setPhone] = useState('');
+  const { data: contacts } = useGetContactsQuery();
   const [addContact, result] = useAddContactMutation();
-
-  // const contacts = useSelector(getContacts);
-  // const dispatch = useDispatch();
 
   const handleAddContact = e => {
     e.preventDefault();
@@ -22,11 +18,12 @@ export function ContactForm() {
       alert(`${name}, is already in contacts.`);
       return;
     }
-    const contact = { id: nanoid(), name, number };
+    const contact = { name, phone };
     addContact(contact);
- 
+    if (result.isSuccess) {
+    }
     setName('');
-    setNumber('');
+    setPhone('');
   };
 
   const handleChange = e => {
@@ -35,7 +32,7 @@ export function ContactForm() {
         setName(e.target.value);
         break;
       case 'number':
-        setNumber(e.target.value);
+        setPhone(e.target.value);
         break;
       default:
         return;
@@ -61,7 +58,7 @@ export function ContactForm() {
         Number
         <input
           className={css.input}
-          value={number}
+          value={phone}
           onChange={handleChange}
           type="tel"
           name="number"
