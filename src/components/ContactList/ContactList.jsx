@@ -6,37 +6,44 @@ import { getFilter } from 'redux/filterSlice';
 import { useGetContactsQuery } from 'redux/contactsSlice';
 
 export const ContactList = () => {
-  // const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
-  // const { data: contacts, error, isLoading } = useGetContactsQuery();
-
-  // const filter = useSelector(state => state.filter.value);
   const { data: contacts, error, isLoading } = useGetContactsQuery();
-  console.log(contacts);
-  console.log(error);
-  console.log(useGetContactsQuery);
 
   const getFilteredContacts = () => {
     const normalizedFilter = filter.toLocaleLowerCase().trim();
-    return contacts.filter(contact =>
-      contact.name.toLocaleLowerCase().includes(normalizedFilter)
-    );
+    if (contacts) {
+      return contacts.filter(contact =>
+        contact.name.toLocaleLowerCase().includes(normalizedFilter)
+      );
+    }
   };
 
   const filteredContacts = getFilteredContacts();
 
   return (
-    <ul className={css.contactList}>
-      {filteredContacts.map(({ name, number, id }) => {
-        return (
-          <ContactItem
-            key={id}
-            id={id}
-            name={name}
-            number={number}
-          ></ContactItem>
-        );
-      })}
-    </ul>
+    <>
+      {isLoading && <div>Loading...</div>}
+
+      {contacts && (
+        <ul className={css.contactList}>
+          {filteredContacts.length !== 0 ? (
+            filteredContacts.map(({ name, phone, id }) => {
+              return (
+                <ContactItem
+                  key={id}
+                  id={id}
+                  name={name}
+                  phone={phone}
+                ></ContactItem>
+              );
+            })
+          ) : (
+            <li> Contact not found </li>
+          )}
+        </ul>
+      )}
+
+      {error && <p>Ups, something was wrong!</p>}
+    </>
   );
 };
