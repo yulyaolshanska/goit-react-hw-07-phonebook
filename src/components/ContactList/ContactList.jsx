@@ -1,11 +1,20 @@
 import { ContactItem } from 'components/ContactItem/ContactItem';
 import css from './ContactList.module.css';
 import { useSelector } from 'react-redux';
-import { getContacts, getFilter } from '../../redux/contactsSlice';
+import { getFilter } from 'redux/filterSlice';
+
+import { useGetContactsQuery } from 'redux/contactsSlice';
 
 export const ContactList = () => {
-  const contacts = useSelector(getContacts);
+  // const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
+  // const { data: contacts, error, isLoading } = useGetContactsQuery();
+
+  // const filter = useSelector(state => state.filter.value);
+  const { data: contacts, error, isLoading } = useGetContactsQuery();
+  console.log(contacts);
+  console.log(error);
+  console.log(useGetContactsQuery);
 
   const getFilteredContacts = () => {
     const normalizedFilter = filter.toLocaleLowerCase().trim();
