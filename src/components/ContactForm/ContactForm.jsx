@@ -24,7 +24,7 @@ export function ContactForm() {
         contact => contact.name.toLowerCase() === name.toLocaleLowerCase()
       )
     ) {
-      alreadyExistsToast('Сontact already exists');
+      alreadyExistsToast(`Contact ${name} already exists`);
       return;
     }
     const contact = { name, phone };

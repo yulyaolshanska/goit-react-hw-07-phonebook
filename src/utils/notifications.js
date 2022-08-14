@@ -9,6 +9,7 @@ export const successToast = text => {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
+    theme: 'dark',
   });
 };
 
@@ -21,6 +22,7 @@ export const errorToast = text => {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
+    theme: 'dark',
   });
 };
 
@@ -33,5 +35,6 @@ export const alreadyExistsToast = text => {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
+    theme: 'dark',
   });
 };
