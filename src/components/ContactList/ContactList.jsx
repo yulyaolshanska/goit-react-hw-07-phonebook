@@ -23,7 +23,7 @@ export const ContactList = () => {
 
   return (
     <>
-      {isLoading && <div>Loading...</div>}
+      {isLoading && <div className={css.loading}>Loading...</div>}
 
       {contacts && (
         <ul className={css.contactList}>

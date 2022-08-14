@@ -1,10 +1,15 @@
 .contactList {
-    width: 60%;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 40px;
-    padding: 20px;
-    box-shadow: 2px 3px 8px 1px grey;
-    border-radius: 6px;
+  width: 60%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 40px;
+  padding: 20px;
+  box-shadow: 2px 3px 8px 1px grey;
+  border-radius: 6px;
 }
 
+.loading {
+  margin-top: 30px;
+  font-weight: 600;
+  font-size: 22px;
+}
