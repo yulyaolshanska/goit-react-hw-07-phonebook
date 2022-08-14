@@ -75,6 +75,9 @@ export function ContactForm() {
           onChange={handleChange}
           type="tel"
           name="number"
+          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          title="Phone number must be at least 5 digits and can contain spaces, dashes, parentheses and can start with +"
+          required
         ></input>
       </label>
       <button className={css.addBtn} type="submit">
