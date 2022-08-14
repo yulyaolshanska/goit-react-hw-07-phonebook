@@ -15,7 +15,7 @@ export function ContactForm() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const { data: contacts } = useGetContactsQuery();
-  const [addContact] = useAddContactMutation();
+  const [addContact, { isLoading, isSuccess }] = useAddContactMutation();
 
   const handleAddContact = async e => {
     e.preventDefault();
@@ -30,13 +30,14 @@ export function ContactForm() {
     const contact = { name, phone };
     try {
       await addContact(contact);
-      successToast('Contact added ');
+      if (isSuccess) {
+        successToast('Contact added ');
+        setName('');
+        setPhone('');
+      }
     } catch (err) {
       errorToast(err.message);
     }
-
-    setName('');
-    setPhone('');
   };
 
   const handleChange = e => {
@@ -80,8 +81,8 @@ export function ContactForm() {
           required
         ></input>
       </label>
-      <button className={css.addBtn} type="submit">
-        Add contact
+      <button className={css.addBtn} type="submit" disabled={!name || !phone}>
+        {isLoading ? 'Loading...' : ' Add contact'}
       </button>
     </form>
   );

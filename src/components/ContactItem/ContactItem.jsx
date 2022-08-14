@@ -4,8 +4,9 @@ import { useDeleteContactMutation } from 'redux/contactsSlice';
 import { successToast } from 'utils/notifications';
 
 export const ContactItem = ({ name, phone, id }) => {
-  const [deleteContact, result] = useDeleteContactMutation();
-  if (result.isSuccess) {
+  const [deleteContact, { isSuccess, isLoading }] = useDeleteContactMutation();
+
+  if (isSuccess) {
     successToast('Contact deleted');
   }
 
@@ -18,8 +19,9 @@ export const ContactItem = ({ name, phone, id }) => {
         className={css.button}
         onClick={() => deleteContact(id)}
         type="button"
+        disabled={isLoading}
       >
-        Delete
+        {isLoading ? 'Deleting...' : 'Delete'}
       </button>
     </li>
   );
