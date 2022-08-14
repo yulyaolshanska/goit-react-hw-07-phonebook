@@ -20,6 +20,7 @@ export const ContactList = () => {
   };
 
   const filteredContacts = getFilteredContacts();
+
   return (
     <>
       {isLoading && <div>Loading...</div>}
@@ -38,7 +39,7 @@ export const ContactList = () => {
               );
             })
           ) : (
-            <li> Contact not found </li>
+            <li> Contact {filter} not found </li>
           )}
         </ul>
       )}
