@@ -11,6 +11,7 @@ export const ContactList = () => {
 
   const getFilteredContacts = () => {
     const normalizedFilter = filter.toLocaleLowerCase().trim();
+
     if (contacts) {
       return contacts.filter(contact =>
         contact.name.toLocaleLowerCase().includes(normalizedFilter)
@@ -19,7 +20,6 @@ export const ContactList = () => {
   };
 
   const filteredContacts = getFilteredContacts();
-
   return (
     <>
       {isLoading && <div>Loading...</div>}

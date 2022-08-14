@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import css from './ContactForm.module.css';
-
+import {
+  successToast,
+  errorToast,
+  alreadyExistsToast,
+} from 'utils/notifications';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   useGetContactsQuery,
   useAddContactMutation,
@@ -10,18 +15,26 @@ export function ContactForm() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const { data: contacts } = useGetContactsQuery();
-  const [addContact, result] = useAddContactMutation();
+  const [addContact] = useAddContactMutation();
 
-  const handleAddContact = e => {
+  const handleAddContact = async e => {
     e.preventDefault();
-    if (contacts.some(contact => contact.name === name)) {
-      alert(`${name}, is already in contacts.`);
+    if (
+      contacts.some(
+        contact => contact.name.toLowerCase() === name.toLocaleLowerCase()
+      )
+    ) {
+      alreadyExistsToast('Сontact already exists');
       return;
     }
     const contact = { name, phone };
-    addContact(contact);
-    if (result.isSuccess) {
+    try {
+      await addContact(contact);
+      successToast('Contact added ');
+    } catch (err) {
+      errorToast(err.message);
     }
+
     setName('');
     setPhone('');
   };
@@ -40,7 +53,7 @@ export function ContactForm() {
   };
 
   return (
-    <form className={css.form} onSubmit={handleAddContact}>
+    <form className={css.form} autoComplete="off" onSubmit={handleAddContact}>
       <label className={css.label}>
         Name
         <input
